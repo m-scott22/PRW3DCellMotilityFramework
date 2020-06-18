@@ -1,0 +1,84 @@
+3D experimental trajectory analysis
+
+1. Use file 'Alltrajdata.m' along with dataset 'CTRL1_trim.mat' to load and clean up cell tracking data to obtain 
+positions and velocities at each time step for each cell in spheroid 1. Repeat for 2 and 3 if required.
+Alternatively use the provided datasets 'Alltrajdata1.m' etc.
+
+2. Use file 'fullanalysis3D_exp.m' to carry out analysis of the cell tracks as in Figure 5 of the paper. This file can:
+-plot trajectories
+-plot the RMSS time series; estimate average cell speed parameter S with confidence interval
+-compute ln(VACF); plot ln(VACF) vs time and a line of best fit; estimate persistence time parameter P with confidence interval
+-plot histogram of speed distribution of all cell speeds at all times; overlay Maxwell-Boltzmann density function
+-compute MSD; plot this with line of best fit and model predicted MSD
+-plot speed distribution 'snapshots' at a chosen time point less than max(T)
+ 
+3. Use file 'indivspeeds.m' to recreate figure 1 of the Supplementary Information.
+
+__________________________________________________________________________________________________________________________
+
+
+Variable inputs and outputs to functions
+
+sphanalysis
+INPUTS
+Alltraj: Matrix of velocities (vx, vy and vz) and positions (x, y and z) for each cell at each time point (dimensions: Ncells by T by 6)
+ACF0: Calculated experimental value of ln(VACF) at 0 
+TL: Number of simulation periods
+Ncells: Number of cells
+T: Time vector
+alphaS: Significance level for S confidence interval
+alphaP: Significance level for P confidence interval
+
+OUTPUTS
+rootmeansquspeed: Root Mean Squared Speed
+S_est: Estimate of parameter S
+ne: Effective sample size
+S_lower: Lower limit for S confidence interval
+S_upper: Upper limit for S confidence interval
+x: Vector giving the centre of each bin in speed histograms
+normalized: Vector of normalized histogram bar heights
+allvel: Vector of speeds of all cells at all times 
+v: Vector counting the number of elements in each histogram bin on speed histograms
+g: Coefficient for the Rayleigh distribution, used in plotting Rayleigh density as an overlay to speed histograms
+YP: FGLS line fit to calculated VACF
+Tj: Amended time vector corresponding to subset of ln(VACF)
+P_est: Estimate of P parameter
+logACF: Vector of calculated ln(VACF)
+P_lower: Lower limit for P confidence interval
+P_upper: Upper limit for P confidence interval
+MSD: Vector of calculated MSD at each time point
+YM: FGLS line fit to calculated MSD
+
+___________________________________________________
+
+
+RMSintervalexp
+INPUTS
+Alltraj: Matrix of velocities (vx, vy and vz) and positions (x, y and z) for each cell at each time point (dimensions: Ncells by T by 6)
+TL: Number of simulation periods
+alphaS: Significance level for S confidence interval
+
+OUTPUTS
+ne: Effective sample size
+S_lower: Lower limit for S confidence interval
+S_upper: Upper limit for S confidence interval
+
+___________________________________________________
+
+
+velocitycutting
+INPUTS
+Alltraj: Matrix of velocities (vx, vy and vz) and positions (x, y and z) for each cell at each time point (dimensions: Ncells by T by 6)
+ACF0: Calculated experimental value of ln(VACF) at 0 
+Ncells: Number of cells
+T: Time vector
+alphaP: Significance level for P confidence interval
+
+OUTPUTS
+YP: FGLS line fit to calculated VACF
+Tj: Amended time vector corresponding to subset of ln(VACF)
+P_est: Estimate of P parameter
+logACF: Vector of calculated ln(VACF)
+P_lower: Lower limit for P confidence interval
+P_upper: Upper limit for P confidence interval
+
