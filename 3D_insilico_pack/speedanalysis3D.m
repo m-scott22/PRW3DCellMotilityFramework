@@ -2,7 +2,6 @@ clear all
 close all
 
 % Load data
-%load('PRW3DsimS1P1dt005nP1000nC1000.mat');
 load('PRW3DsimS25P01dt005nP100nC550.mat');
 xlim=nPeriods*params.dt; %set limit in x direction
 
