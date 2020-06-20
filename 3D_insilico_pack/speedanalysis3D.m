@@ -2,7 +2,8 @@ clear all
 close all
 
 % Load data
-load('PRW3DsimS1P1dt005nP1000nC1000.mat');
+%load('PRW3DsimS1P1dt005nP1000nC1000.mat');
+load('PRW3DsimS25P01dt005nP100nC550.mat');
 xlim=nPeriods*params.dt; %set limit in x direction
 
 %Analyse RMSS, VACF, MSD
@@ -53,7 +54,7 @@ v = linspace(0,3*S_est,100);
 const = 4*pi*(1/((2/3)*pi*(S_est)^2))^1.5;
 f = const.*v.^2.*exp(-1./(((2/3)*(S_est)^2)).*v.^2);
 plot(v,f,'r','LineWidth',1.5)
-axis([0 3*S_est 0 1.3])
+axis([0 3*S_est 0 0.05])
 
 %plot histogram of speeds for second chosen time
 allvel=histattime(Alltraj,Ncells,10);
@@ -69,7 +70,7 @@ v = linspace(0,3*S_est,50);
 const = 4*pi*(1/((2/3)*pi*(S_est)^2))^1.5;
 f = const.*v.^2.*exp(-1./(((2/3)*(S_est)^2)).*v.^2);
 plot(v,f,'r','LineWidth',1.5)
-axis([0 3*S_est 0 1.3])
+axis([0 3*S_est 0 0.05])
 
 
 %plot histogram of speeds for third chosen time
@@ -86,10 +87,10 @@ v = linspace(0,3*S_est,100);
 const = 4*pi*(1/((2/3)*pi*(S_est)^2))^1.5;
 f = const.*v.^2.*exp(-1./(((2/3)*(S_est)^2)).*v.^2);
 plot(v,f,'r','LineWidth',1.5)
-axis([0 3*S_est 0 1.3])
+axis([0 3*S_est 0 0.05])
 
 %plot histogram of speeds for final chosen time
-allvel=histattime(Alltraj,Ncells,500);
+allvel=histattime(Alltraj,Ncells,100);
 [v,x]=hist(allvel,50);
 normalized=v/trapz(x,v);
 h(6)=subplot(3,4,12);
@@ -102,7 +103,7 @@ v = linspace(0,3*S_est,100);
 const = 4*pi*(1/((2/3)*pi*(S_est)^2))^1.5;
 f = const.*v.^2.*exp(-1./(((2/3)*(S_est)^2)).*v.^2);
 plot(v,f,'r','LineWidth',1.5)
-axis([0 3*S_est 0 1.3])
+axis([0 3*S_est 0 0.05])
 
 %%
 
