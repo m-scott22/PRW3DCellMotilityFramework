@@ -2,7 +2,7 @@
 
 1. Use file 'PRW3Dsim.m' to generate in silico cell trajectories with specified parameter values. 
 Specify S, P, dt and initial speed, positions and velocities along with number of cells and number of simulation
-periods. Alternatively use one of the datasets provided.
+periods. Alternatively use the dataset provided, 'PRW3DsimS25P01dt005nP100nC550.mat'.
 
 2. Use file 'fullanalysis3D.m' to carry out analysis of the cell tracks as in Figure 6 of the paper. This file can:
 -plot the RMSS time series; estimate average cell speed parameter S with confidence interval
@@ -15,10 +15,10 @@ periods. Alternatively use one of the datasets provided.
 -plot trajectories
 -plot speed distribution 'snapshots' at a chosen time point less than max(T)
 
-4. Use file 'VACFanalysis3D.m' to carry out analysis on VACF and P estimates for 6 different datasets as in Figure 3 of the paper.
+4. Use file 'VACFanalysis3D.m' to carry out analysis on VACF and P estimates as in Figure 3 of the paper.
 This file can:
 -compute ln(VACF); plot ln(VACF) vs time and a line of best fit; estimate persistence time parameter P 
-for 6 different datasets with confidence intervals  
+with confidence intervals  
 
 __________________________________________________________________________________________________________________________
 
