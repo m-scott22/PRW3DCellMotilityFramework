@@ -19,6 +19,7 @@ periods. Alternatively use the dataset provided, 'PRW3DsimS25P01dt005nP100nC550.
 This file can:
 -compute ln(VACF); plot ln(VACF) vs time and a line of best fit; estimate persistence time parameter P 
 with confidence intervals  
+- repeat this analysis for up to 6 datasets side by side
 
 __________________________________________________________________________________________________________________________
 
