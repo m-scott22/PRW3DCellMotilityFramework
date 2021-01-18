@@ -3,14 +3,16 @@ close all
 
 % Load data
 load('PRW3DsimS25P01dt005nP100nC550.mat'); 
+%load('PRW3DsimS1P1dt001nP1000nC1000.mat');
 alphaS=0.05; %For S parameter confidence intervals
 alphaP=0.05; %For P parameter confidence intervals
+mse=5; %MSE threshold for P estimate cut off
 %Analyse RMSS, VACF, MSD
-[rootmeansquspeed,S_est,ne,S_lower,S_upper,x,normalized,allvel,v,g,YP,Tj,P_est,logACF,P_lower,P_upper,MSD,YM]=sphanalysisinsilico(Alltraj,N,Ncells,T,alphaS,alphaP);
+[rootmeansquspeed,S_est,ne,S_lower,S_upper,x,normalized,allvel,v,g,YP,Tj,P_est,logACF,P_lower,P_upper,MSD,YM,lnACF]=sphanalysisinsilico(Alltraj,N,Ncells,T,alphaS,alphaP,mse);
 
 %% Plot root mean square speed calculated over all cells at each time point, and S on graph
 
-f1 = figure('PaperSize',[20.98 29.68],'PaperPosition',[1 5 30 18]);
+f1 = figure('PaperSize',[20.98 29.68],'PaperPosition',[1 5 30 18],'DefaultAxesFontSize',14);
 h(1)=subplot(2,2,1);
 plot(T,rootmeansquspeed,'g','LineWidth',1.5)
 xlabel('Time')
@@ -66,6 +68,6 @@ plot(T,(2.*(S_est^2).*(P_est^2).*(exp(-T./P_est)+(T./P_est)-1)),'r','LineWidth',
 
 %% Add sublabels
 htext=sublabel(h,0,-20);
-
-%Save figure
+%% 
+% %Save figure
 %print('fullanalysis3D', '-djpeg', '-r1200')

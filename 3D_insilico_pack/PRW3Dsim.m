@@ -1,6 +1,9 @@
+clear all
+close all
+
 % Input parameter values for speed S and persistence time P
-params.S=1;
-params.P=10;
+params.S=3;
+params.P=1;
 
 
 % Initialise cells at the origin
@@ -14,7 +17,7 @@ params.dt=0.01; %this is needed in the stochastic simulations,
 nPeriods=1000;  %total time is nPeriods*dt
 params.Nsteps=100;
 
-Ncells=1000;
+Ncells=70;
 
 %for each cell
 for cell=1:Ncells
@@ -54,5 +57,5 @@ for cell=1:Ncells
     
 end
 
-save(['PRW3Dsim','S',num2str(params.S),'P10','dt001','nP',num2str(nPeriods),'nC',num2str(Ncells)])
+%save(['PRW3Dsim','S',num2str(params.S),'P1','dt001','nP',num2str(nPeriods),'nC',num2str(Ncells)])
 % save(['PRW3Dsim',num2str(params.S),num2str(params.P),num2str(nPeriods),num2str(Ncells),num2str(0005)])

@@ -1,6 +1,6 @@
-function [Tj,Y,P,fulllogACF,P_lower,P_upper]=velocitycuttinginsilico(Alltraj,Ncells,T,alphaP)
+function [Tj,Y,P,fulllogACF,P_lower,P_upper,lnACF]=velocitycuttinginsilico(Alltraj,Ncells,T,alphaP,mse)
 %Choose robustness
-MSEchoice=0.5; %MSE threshold
+MSEchoice=mse; %MSE threshold
 n=120; %Number of spaces in cutoffs vector
 
 for cell=1:Ncells
@@ -70,7 +70,7 @@ end
 finalcutoffindex=find(MSE<MSEchoice,1,'last');
 finalcutoff=cutoffs(finalcutoffindex);
 
-
+MSE
 %% Use cutoff to make a subset for line fit, fit line and calculate CI for P
 
 %Cut lnACF to relevant cutoff point
@@ -82,6 +82,8 @@ lnACF=[];
   end
  end
 Tj=T(1:length(lnACF));
+
+lnACF
 
 %Fit fgls to the updated subset
 [coeffsP,seP]=fgls(Tj,-lnACF,'innovMdl','AR','numIter',10,'resCond',true);
