@@ -1,4 +1,4 @@
-function [rootmeansquspeed,S_est,ne,S_lower,S_upper,x,normalized,allvel,v,g,YP,Tj,P_est,logACF,P_lower,P_upper,MSD,YM]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP)
+function [rootmeansquspeed,S_est,ne,S_lower,S_upper,x,normalized,allvel,v,g,YP,Tj,P_est,logACF,P_lower,P_upper,MSD,YM,lnACF,t]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP,mse)
 
 %% Estimate S_est as root mean square speed averaged across all cells at all times
 
@@ -13,7 +13,7 @@ S_est=nanmean(rootmeansquspeed);
 %% Plot VACF, lnVACF (and params.P theoretical VACF in in silico case)
 % Estimate P_est as -1/grad for line of best fit with gradient grad 
 
-[Tj,YP,P_est,logACF,P_lower,P_upper]=velocitycutting(Alltraj,Ncells,T,ACF0,alphaP);
+[Tj,YP,P_est,logACF,P_lower,P_upper,lnACF]=velocitycutting(Alltraj,Ncells,T,ACF0,alphaP,mse);
 
 
 %% Plot histogram of all speeds at all times and overlay Maxwell Boltzmann pdf using S_est (and params.S in in silico case)
@@ -23,8 +23,8 @@ for cell=1:Ncells
     allvel=[allvel,sqrt(Alltraj(cell,:,1).^2+Alltraj(cell,:,2).^2+Alltraj(cell,:,3).^2)];
 end
 
-[v,x]=hist(allvel,50);
-normalized=v/trapz(x,v);
+[u,x]=hist(allvel,50);
+normalized=u/trapz(x,u);
 
 % Maxwell-Boltzmann density using estimates
 v = linspace(0,4*S_est,100);

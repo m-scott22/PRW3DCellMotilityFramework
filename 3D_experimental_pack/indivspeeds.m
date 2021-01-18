@@ -27,7 +27,7 @@ E=sort(D);
 
 fulltracks1=cellspeeds1(E,:); %tracks of length 148 and 149, cell by time
 
-f1 = figure('PaperSize',[20.98 29.68],'PaperPosition',[1 5 60 18]);
+f1 = figure('PaperSize',[20.98 29.68],'PaperPosition',[1 5 60 18],'DefaultAxesFontSize',14);
 h(1)=subplot(1,3,1);
 Me_fulltracks=mean(fulltracks1,2,'omitnan');
 maxsp=max(Me_fulltracks);
@@ -144,5 +144,5 @@ end
 htext=altsublabels(h,0,-20);
 
 %Save figure
-%print('speeds', '-djpeg', '-r500')
+print('speeds', '-djpeg', '-r500')
 

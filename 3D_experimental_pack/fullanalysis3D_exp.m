@@ -6,13 +6,14 @@ load('Alltrajdata1.mat')
 T=DT*T; %Set timescale
 alphaS=0.05; %alpha for S parameter confidence intervals
 alphaP=0.05; %alpha for P parameter confidence intervals
+mse=0.5; %MSE threshold for cut off in P estimates
 Ncells=i;
 
 %Analyse data (RMSS, VACF, speed histograms, MSD, S and P estimates and CIs)
-[rootmeansquspeed1,S_est1,ne1,S_lower1,S_upper1,x1,normalized1,allvel1,v1,g1,YP1,Tj1,P_est1,logACF1,P_lower1,P_upper1,MSD1,YM1]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP);
+ [rootmeansquspeed1,S_est1,ne1,S_lower1,S_upper1,x1,normalized1,allvel1,v1,g1,YP1,Tj1,P_est1,logACF1,P_lower1,P_upper1,MSD1,YM1,lnACF]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP,mse);
 
 %Plot RMSS over time for spheroid 1
-f1 = figure('PaperSize',[20.98 29.68],'PaperPosition',[1 5 50 18]);
+f1 = figure('PaperSize',[20.98 29.68],'PaperPosition',[1 5 50 18],'DefaultAxesFontSize',14);
 h(1)=subplot(3,4,1);
 plot(T,rootmeansquspeed1,'g','LineWidth',1.5)
 xlabel('Time (h)')
@@ -63,14 +64,13 @@ hold on
 plot(T,(2.*(S_est1^2).*(P_est1^2).*(exp(-T./P_est1)+(T./P_est1)-1)),'r','LineWidth',1.5);
 
 %%
-% Load second dataset
+%Load second dataset
 load('Alltrajdata2.mat')
 T=DT*T; %Set timescale
 Ncells=i;
 
 %Analyse data (RMSS, VACF, speed histograms, MSD, S and P estimates and CIs)
-[rootmeansquspeed2,S_est2,ne2,S_lower2,S_upper2,x2,normalized2,allvel2,v2,g2,YP2,Tj2,P_est2,logACF2,P_lower2,P_upper2,MSD2,YM2]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP);
-
+[rootmeansquspeed2,S_est2,ne2,S_lower2,S_upper2,x2,normalized2,allvel2,v2,g2,YP2,Tj2,P_est2,logACF2,P_lower2,P_upper2,MSD2,YM2,lnACF2]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP,mse);
 %Plot RMSS over time for spheroid 2
 h(5)=subplot(3,4,5);
 plot(T,rootmeansquspeed2,'g','LineWidth',1.5)
@@ -129,7 +129,7 @@ T=DT*T; %Set timescale
 Ncells=i;
 
 %Analyse data (RMSS, VACF, speed histograms, MSD, S and P estimates and CIs)
-[rootmeansquspeed3,S_est3,ne3,S_lower3,S_upper3,x3,normalized3,allvel3,v3,g3,YP3,Tj3,P_est3,logACF3,P_lower3,P_upper3,MSD3,YM3]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP);
+[rootmeansquspeed3,S_est3,ne3,S_lower3,S_upper3,x3,normalized3,allvel3,v3,g3,YP3,Tj3,P_est3,logACF3,P_lower3,P_upper3,MSD3,YM3,lnACF3]=sphanalysis(Alltraj,ACF0,TL,Ncells,T,alphaS,alphaP,mse);
 
 %Plot RMSS over time for spheroid 3
 h(9)=subplot(3,4,9);
@@ -186,5 +186,5 @@ plot(T,(2.*(S_est3^2).*(P_est3^2).*(exp(-T./P_est3)+(T./P_est3)-1)),'r','LineWid
 %Add sublabels
 htext=ctrlsublabel(h,0,-16);
  
-%Save figure
+%% %Save figure
 %print('fullanalysis3d_exp', '-djpeg', '-r500')

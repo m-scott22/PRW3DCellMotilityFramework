@@ -1,6 +1,6 @@
-function [Tj,Y,P,fulllogACF,P_lower,P_upper]=velocitycutting(Alltraj,Ncells,T,ACF0,alphaP)
+function [Tj,Y,P,fulllogACF,P_lower,P_upper,lnACF]=velocitycutting(Alltraj,Ncells,T,ACF0,alphaP,mse)
 %Choose robustness
-MSEchoice=0.5; %MSE threshold
+MSEchoice=mse; %MSE threshold
 n=120; %Number of spaces in cutoffs vector
 
 for cell=1:Ncells

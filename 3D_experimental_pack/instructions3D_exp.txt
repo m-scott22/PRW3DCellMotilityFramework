@@ -4,7 +4,10 @@
 positions and velocities at each time step for each cell in spheroid 1. Repeat for 2 and 3 if required.
 Alternatively use the provided datasets 'Alltrajdata1.m' etc.
 
-2. Use file 'fullanalysis3D_exp.m' to carry out analysis of the cell tracks as in Figure 5 of the paper. This file can:
+2. Use file 'normality.m' to filter out velocities of full length tracks in the data set and conduct normality tests
+for each component of velocity.
+
+3. Use file 'fullanalysis3D_exp.m' to carry out analysis of the cell tracks as in Figure 5 of the paper. This file can:
 -plot trajectories
 -plot the RMSS time series; estimate average cell speed parameter S with confidence interval
 -compute ln(VACF); plot ln(VACF) vs time and a line of best fit; estimate persistence time parameter P with confidence interval
@@ -12,7 +15,7 @@ Alternatively use the provided datasets 'Alltrajdata1.m' etc.
 -compute MSD; plot this with line of best fit and model predicted MSD
 -plot speed distribution 'snapshots' at a chosen time point less than max(T)
  
-3. Use file 'indivspeeds.m' to recreate figure 1 of the Supplementary Information.
+4. Use file 'indivspeeds.m' to recreate figure 1 of the Supplementary Information.
 
 __________________________________________________________________________________________________________________________
 
@@ -28,6 +31,8 @@ Ncells: Number of cells
 T: Time vector
 alphaS: Significance level for S confidence interval
 alphaP: Significance level for P confidence interval
+mse: MSE threshold value for cut off in P estimates
+
 
 OUTPUTS
 rootmeansquspeed: Root Mean Squared Speed
@@ -73,6 +78,7 @@ ACF0: Calculated experimental value of ln(VACF) at 0
 Ncells: Number of cells
 T: Time vector
 alphaP: Significance level for P confidence interval
+mse: MSE threshold value for cut off in P estimates
 
 OUTPUTS
 YP: FGLS line fit to calculated VACF
